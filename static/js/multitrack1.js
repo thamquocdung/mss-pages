@@ -44,8 +44,49 @@ var metaData = [
 
 const videoHeight = 340;
 // console.log(111, `./static/audio/${songData.filename}.wav`)
+const addController = () =>{
+  const multitrack_ctl = document.querySelector('.multitrack-ctl')
+  for (let i = 0; i < 4; i++) {
+    const ctlDiv = document.createElement('div');
+    ctlDiv.className = "play-btn btn"
 
-const initMultiTrack = (filename) => {
+    const stemImg = document.createElement("img")
+    stemImg.src = `./static/images/instruments/${stems[i]}.png`
+    stemImg.className = "stem-icon mute-btn"
+    stemImg.setAttribute("width", "22px")
+    
+    const span = document.createElement('span');
+    span.className = "mute-btn btn"
+    span.setAttribute("data-track-id", i)
+
+
+    const volUpIcon = document.createElement('i');
+    volUpIcon.className ="fas fa-volume-up"
+    span.appendChild(volUpIcon)
+
+    const muteIcon = document.createElement('i');
+    muteIcon.className ="fas fa-volume-mute"
+    span.appendChild(muteIcon)
+
+    // volume slider
+    const volumeSlider = document.createElement('input');
+    volumeSlider.className ="volume-slider"
+    volumeSlider.setAttribute("type", "range")
+    volumeSlider.setAttribute("min", 0.0)
+    volumeSlider.setAttribute("max", 1.0)
+    volumeSlider.setAttribute("step", 0.1)
+    volumeSlider.setAttribute("value", 0.5)
+    volumeSlider.setAttribute("data-track-id", i)
+    ///////////
+
+    ctlDiv.appendChild(stemImg)
+    //ctlDiv.appendChild(span)
+    ctlDiv.appendChild(volumeSlider)
+    multitrack_ctl.appendChild(ctlDiv)
+  }
+}
+
+const initMultiTrack = (filename, containerID) => {
   trackData = []
   
   for (var i = 0; i < metaData.length; i++) {
@@ -71,9 +112,9 @@ const initMultiTrack = (filename) => {
     trackData.push(track)
   }
 
-  const multitrack = Multitrack.create(trackData,
+  multitrack = Multitrack.create(trackData,
     {
-      container: document.querySelector('#multitrack'), // required!
+      container: document.querySelector(containerID), // required!
       minPxPerSec: 12, // zoom level
       rightButtonDrag: true, // drag tracks with the right mouse button
       cursorColor: '#57BAB6',
@@ -96,12 +137,12 @@ const initMultiTrack = (filename) => {
   })
   const numTrack = multitrack.wavesurfers
   // Play/pause button
-  const button = document.querySelector('#play')
+  const buttons = document.querySelector('#play')
 
   // Forward/back buttons
-  const forward = document.querySelector('#forward')
+  const forwards = document.querySelector('#forward')
 
-  const backward = document.querySelector('#backward')
+  const backwards = document.querySelector('#backward')
 
 
 
@@ -143,51 +184,6 @@ const initMultiTrack = (filename) => {
   // This should be called before calling initMultiTrack again to properly clean up
   window.onbeforeunload = () => {
     multitrack.destroy()
-  }
-
-
-
-  const multitrack_ctl = document.querySelector('.multitrack-ctl')
-  for (let i = 0; i < 4; i++) {
-    const ctlDiv = document.createElement('div');
-    ctlDiv.className = "play-btn btn"
-
-    const stemImg = document.createElement("img")
-    stemImg.src = `./static/images/instruments/${stems[i]}.png`
-    stemImg.className = "stem-icon mute-btn"
-    stemImg.setAttribute("width", "22px")
-    
-    const span = document.createElement('span');
-    span.className = "mute-btn btn"
-    span.setAttribute("data-track-id", i)
-
-
-    const volUpIcon = document.createElement('i');
-    volUpIcon.className ="fas fa-volume-up"
-    span.appendChild(volUpIcon)
-
-    const muteIcon = document.createElement('i');
-    muteIcon.className ="fas fa-volume-mute"
-    span.appendChild(muteIcon)
-
-    // volume slider
-    const volumeSlider = document.createElement('input');
-    volumeSlider.className ="volume-slider"
-    volumeSlider.setAttribute("type", "range")
-    volumeSlider.setAttribute("min", 0.0)
-    volumeSlider.setAttribute("max", 1.0)
-    volumeSlider.setAttribute("step", 0.1)
-    volumeSlider.setAttribute("value", 0.5)
-    volumeSlider.setAttribute("data-track-id", i)
-    ///////////
-
-    ctlDiv.appendChild(stemImg)
-    //ctlDiv.appendChild(span)
-    ctlDiv.appendChild(volumeSlider)
-    multitrack_ctl.appendChild(ctlDiv)
-
-
-    
   }
 
 
@@ -337,4 +333,6 @@ const initMultiTrack = (filename) => {
 
 
 
-initMultiTrack("G5ERdrjBe40")
+initMultiTrack("G5ERdrjBe40", "#multitrack1")
+// initMultiTrack("fdcJEKh6jFw", "#multitrack2")
+// initMultiTrack("rRFDUclCpvU", "#multitrack3")
