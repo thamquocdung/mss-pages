@@ -33,7 +33,6 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/custom.css">
   <!-- <link rel="icon" href="/static/images/favicon.svg"> -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -95,56 +94,107 @@
   <h1 style="text-align: center; margin-top: 10px;"> Keep waiting! <br/> The process can takes several minutes ... </h1> 
 </div>
 
-<div class="result-container">
-  <div style="width: 100%;display: flex;justify-content: center;">
-    <div class="audio-container" style="margin: 2em 0;">
-      <div class="buttons" style="justify-content: space-around;">
-        <span class="play-btn btn" id="play">
-          <i class="fas fa-play"></i>
-          <i class="fas fa-pause"></i>
-        </span>
-        
-        <span class="backward-btn btn" id="backward">
-          <i class="fas fa-backward" ></i>
-        </span>
-        <span class="forward-btn btn" id="forward">
-          <i class="fas fa-forward" ></i>
-        </span>
-        <span class="mute-btn btn" data-track-id="-1">
-          <i class="fas fa-volume-up"></i>
-          <i class="fas fa-volume-mute"></i>
-        </span>
-        <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value="0.5"
-            class="volume-slider"
-            data-track-id="-1"
-          />
-      </div>
-    </div>
-  </div>
-  
-  <div id="player-container" style="display: flex; margin-bottom: 100px;">
-    <video id="video-player" width="640" height="360" controls>
-      <source src="./static/videos/cut_G5ERdrjBe40.mp4" type="video/mp4">
+<!-- <div class="result-container">
+  <div class="player-container" style="display: flex; margin-bottom: 100px;">
+    <video class="video-player" width="640" height="360" controls muted>
+      <source src="static/videos/cut_G5ERdrjBe40.mp4" type="video/mp4">
     </video>
     <div class="multitrack-container">
       <div class="multitrack-ctl"></div>
-      <div id="multitrack"></div>
+      <div id="multitrack0" class="multitrack"></div>
     </div>
   </div>
+</div>  -->
 
+<div id="containers"></div>
+
+
+
+
+
+<!-- <div class="result-container">
+  <div id="player-container" style="display: flex;">
+    <video id="video-player" width="640" height="360" controls>
+      <source src="#" type="video/mp4">
+    </video>
+    <div class="multitrack-container">
+      <div class="multitrack-ctl"></div>
+      <div id="multitrack1" class="multitrack"></div>
+    </div>
+  </div>
 </div>
 
+<div class="result-container">
+  <div id="player-container" style="display: flex;">
+    <video id="video-player" width="640" height="360" controls>
+      <source src="#" type="video/mp4">
+    </video>
+    <div class="multitrack-container">
+      <div class="multitrack-ctl"></div>
+      <div id="multitrack2" class="multitrack"></div>
+    </div>
+  </div>
+</div> -->
+
+<script src="static/js/ejs.min.js"></script>
+<script src="static/js/ejs.js"></script>
+<script>
+  var num_samples = 3;
+  const trackNames = [[0, "G5ERdrjBe40"], [1, "fdcJEKh6jFw"], [2, "rRFDUclCpvU"]]
+  html = ejs.render(
+`
+    <% trackNames.forEach(function(trackName){ %>
+      <div class="result-container">
+        <div style="width: 100%;display: flex;justify-content: center;">
+          <div class="audio-container" style="margin: 2em 0;">
+            <div class="buttons" style="justify-content: space-around;">
+              <span class="play-btn btn play">
+                <i class="fas fa-play"></i>
+                <i class="fas fa-pause"></i>
+              </span>
+              
+              <span class="backward-btn btn backward">
+                <i class="fas fa-backward" ></i>
+              </span>
+              <span class="forward-btn btn forward">
+                <i class="fas fa-forward" ></i>
+              </span>
+              <span class="mute-btn btn" data-track-id="-1">
+                <i class="fas fa-volume-up"></i>
+                <i class="fas fa-volume-mute"></i>
+              </span>
+              <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  value="0.5"
+                  class="volume-slider"
+                  data-track-id="-1"
+                />
+            </div>
+          </div>
+        </div>
+        <div id="player-container" style="display: flex;margin-bottom: 100px;margin-left: 20px;">
+          <video class="video-player" width="640" height="360" controls muted>
+            <source src="static/videos/cut_<%=trackName[1]%>.mp4" type="video/mp4">
+          </video>
+          <div class="multitrack-container">
+            <div class="multitrack-ctl"></div>
+            <div id="multitrack<%=trackName[0]%>" class="multitrack"></div>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+    `,
+    {trackNames: trackNames}
+
+  );
+  // // Vanilla JS:
+  document.getElementById('containers').innerHTML = html
+</script>
 
 
-
-<!-- 
-{% include './bibtex.html' %}
-{% include './footer.html' %} -->
 
 
 
@@ -152,6 +202,7 @@
 <script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.esm.js"></script>
 <script src="https://unpkg.com/wavesurfer-multitrack/dist/multitrack.min.js"></script>
 <!-- <script src="static/js/loader.js"></script> -->
-<script src="static/js/multitrack1.js"></script>
+<script src="static/js/multitrack2.js"></script>
+
 </body>
 </html>
