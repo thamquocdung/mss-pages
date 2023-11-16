@@ -252,8 +252,9 @@ background-color: #9a905d;
 }
 
 
-.index{
-    font-size: xx-large;
+.song-icon{
+    font-size: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
+    width: 50px;
 }
