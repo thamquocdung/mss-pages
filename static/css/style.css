@@ -258,3 +258,10 @@ background-color: #9a905d;
     margin-bottom: 20px;
     width: 50px;
 }
+
+.label-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
+}

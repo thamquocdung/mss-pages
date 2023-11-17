@@ -132,7 +132,12 @@ const addEventMultitrack = (multitrack, index) => {
         // player.pauseVideo()
       }
     }
+    multitrack.on('finish', () =>{
+      console.log("finished")
+    })
   })
+
+  
 
 
 
