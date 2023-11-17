@@ -102,6 +102,9 @@ const addEventMultitrack = (multitrack, index) => {
 
 
   var videoPlayer = document.querySelectorAll(".video-player")[index];
+  videoPlayer.onseeked = (event) => {
+    syncVideoToTrack();
+  };
   // videoPlayer.muted = true;
   
 
@@ -265,10 +268,13 @@ const addEventMultitrack = (multitrack, index) => {
     videoPlayer.currentTime = currentTime;
     multitrack.setTime(currentTime);
   };
+  const syncVideoToTrack = () => {
+    currentTime = videoPlayer.currentTime;
+    multitrack.setTime(currentTime);
+  };
   trackContainer = document.querySelector(`#multitrack${index}`);
   // console.log(trackContainer)
   trackContainer.onclick = () => {
-    console.log("sync")
     syncTrackToVideo()
   }
 
@@ -339,7 +345,6 @@ multitrack_objs = initMultiTrack(trackNames)
 
 $(document).ready(function() {
   addController()
-  console.log( "ready!" );
   for (let trackId = 0; trackId < multitrack_objs.length; trackId++){
     addEventMultitrack(multitrack_objs[trackId], trackId)
   }
