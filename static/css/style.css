@@ -251,11 +251,14 @@ background-color: #9a905d;
   font-size: 15px;
 }
 
+.result-container{
+  margin-top: 30px;
+}
 
 .song-icon{
     font-size: 22px;
     margin-left: 20px;
-    margin-bottom: 20px;
+    /* margin-bottom: 10px; */
     width: 50px;
 }
 
