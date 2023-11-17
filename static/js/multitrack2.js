@@ -102,7 +102,6 @@ const addEventMultitrack = (multitrack, index) => {
 
 
   var videoPlayer = document.querySelectorAll(".video-player")[index];
-  console.log(multitrack, index, videoPlayer)
   // videoPlayer.muted = true;
   
 
