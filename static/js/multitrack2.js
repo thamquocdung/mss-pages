@@ -139,7 +139,9 @@ const addEventMultitrack = (multitrack, index) => {
     multitrack.wavesurfers[0].on('audioprocess', function (time) {
       pointer = $(`#multitrack${index} > div > div > div`)[0]
       waveProgress = parseFloat(pointer.style.left.slice(0,-1))
-
+      if (!videoPlayer.muted){
+        videoPlayer.muted = true
+      }
       // console.log(time, multitrack.wavesurfers[0].getDuration(), parseFloat(pointer.style.left.slice(0,-1)))
       offset = Math.abs(100 - waveProgress)
       if (offset <= 0.05) {
