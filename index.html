@@ -95,6 +95,36 @@
 </div> -->
 
 <!-- <div class="result-container">
+  <div style="width: 100%;display: flex;justify-content: center;">
+    <div class="audio-container" style="margin: 2em 0;">
+      <div class="buttons" style="justify-content: space-around;">
+        <span class="play-btn btn play">
+          <i class="fas fa-play"></i>
+          <i class="fas fa-pause"></i>
+        </span>
+        
+        <span class="backward-btn btn backward">
+          <i class="fas fa-backward" ></i>
+        </span>
+        <span class="forward-btn btn forward">
+          <i class="fas fa-forward" ></i>
+        </span>
+        <span class="mute-btn btn" data-track-id="-1">
+          <i class="fas fa-volume-up"></i>
+          <i class="fas fa-volume-mute"></i>
+        </span>
+        <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value="0.5"
+            class="volume-slider"
+            data-track-id="-1"
+          />
+      </div>
+    </div>
+  </div>
   <div class="label-container">
     <span class="dnerf">Mixture Input</span>
     <span class="dnerf">Multitrack Output</span>
@@ -105,7 +135,7 @@
     </video>
     <div class="multitrack-container">
       <div class="multitrack-ctl"></div>
-      <div id="multitrack0" class="multitrack"></div>
+      <div id="multitrack" class="multitrack"></div>
     </div>
   </div>
 </div>  -->
@@ -185,7 +215,7 @@
           <span class="dnerf">Mixture Input</span>
           <span class="dnerf">Multitrack Output</span>
         </div>
-        <div id="player-container" style="display: flex;margin-bottom: 100px;margin-left: 20px;">
+        <div id="player-container" style="display: flex;margin-bottom: 100px;">
           <video class="video-player" width="640" height="360" controls muted>
             <source src="static/videos/cut_<%=trackName[1]%>.mp4" type="video/mp4">
           </video>
@@ -200,19 +230,22 @@
     {trackNames: trackNames}
 
   );
-  // // Vanilla JS:
   document.getElementById('containers').innerHTML = html
 </script>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{eCMU,
-  author       = {Quoc-Dung Tham, Duc-Dung Nguyen},
-  title        = {eCMU: An Efficient Phase-aware Framework for Music Source Separation with Conformer},
-  conference   = {Research, Innovation and Vision for the Future (RIVF)},
-  year         = {2023},
-}</code></pre>
+    <pre>
+      <code>
+        @article{eCMU,
+          author       = {Quoc-Dung Tham, Duc-Dung Nguyen},
+          title        = {eCMU: An Efficient Phase-aware Framework for Music Source Separation with Conformer},
+          conference   = {Research, Innovation and Vision for the Future (RIVF)},
+          year         = {2023},
+        }
+      </code>
+    </pre>
   </div>
 </section>
 

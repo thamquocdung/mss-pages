@@ -96,7 +96,6 @@ const addEventMultitrack = (multitrack, index) => {
 
   // Forward/back buttons
   var forward = document.querySelectorAll('.forward')[index]
-
   var backward = document.querySelectorAll('.backward')[index]
   
 
@@ -108,20 +107,20 @@ const addEventMultitrack = (multitrack, index) => {
   // videoPlayer.muted = true;
   
 
-  play.disabled = true
+  // play.disabled = true
   multitrack.once('canplay', () => {
     forward.onclick = () => {
-      multitrack.setTime(multitrack.getCurrentTime() + 30);
+      multitrack.setTime(multitrack.getCurrentTime() + 5);
       syncTrackToVideo()
     }
     backward.onclick = () => {
-      multitrack.setTime(multitrack.getCurrentTime() - 30);
+      multitrack.setTime(multitrack.getCurrentTime() - 5);
       syncTrackToVideo()
     }
-    play.disabled = false;
+    // play.disabled = false;
     play.onclick = () => {
       multitrack.isPlaying() ? multitrack.pause() : multitrack.play()
-      // button.textContent = multitrack.isPlaying() ? 'Pause' : 'Play'
+
       if (multitrack.isPlaying()) {
         play.classList.add("playing");
         videoPlayer.play();
@@ -132,15 +131,27 @@ const addEventMultitrack = (multitrack, index) => {
         // player.pauseVideo()
       }
     }
-    multitrack.on('finish', () =>{
-      console.log("finished")
-    })
+    // multitrack.wavesurfers[1].on('finish', () => {
+    //   // multitrack.pause()
+    //   // multitrack.setTime(0)
+    //   console.log("finished")
+    // })
+    multitrack.wavesurfers[0].on('audioprocess', function (time) {
+      console.log(time, multitrack.wavesurfers[0].getDuration())
+      offset = Math.abs(multitrack.wavesurfers[0].getDuration() - time)
+      if (offset <= 0.05) {
+        console.log("finished");
+        
+        multitrack.pause()
+        videoPlayer.pause()
+        multitrack.setTime(0)
+        videoPlayer.currentTime = 0
+
+        multitrack.isPlaying() ? play.classList.add("playing") : play.classList.remove("playing")
+      }
+    });
   })
-
   
-
-
-
 
 
   // Destroy the plugin on unmount
@@ -238,7 +249,7 @@ const addEventMultitrack = (multitrack, index) => {
         } else {
           
           container = wavesurfer["renderer"]["container"]
-          console.log(container)
+          // console.log(container)
           container.classList.remove("disabletrack");
         }
       
@@ -288,7 +299,7 @@ const addEventMultitrack = (multitrack, index) => {
 
 
 const initMultiTrack = (filenames) => {
-  const tracks = []
+  const track_objs = []
 
   for (var f=0; f < filenames.length; f++){
     trackData = []
@@ -297,8 +308,8 @@ const initMultiTrack = (filenames) => {
       track = {
         id: i,
         draggable: true,
-        startPosition: 0.5,
-        startCue: 0.1,
+        // startPosition: 0.01,
+        // startCue: 0.01,
         volume: 0.5,
         options: {
           height: videoHeight/4,
@@ -307,7 +318,7 @@ const initMultiTrack = (filenames) => {
         },
         url: `./static/audio/${filenames[f][1]}/${metaData[i]["stem"].toLowerCase()}.wav`,
         intro: {
-          endTime: 200,
+          endTime: 120,
           label: metaData[i]["stem"],
           color: '#FFE56E',
         }
@@ -324,8 +335,6 @@ const initMultiTrack = (filenames) => {
         cursorWidth: 5,
         trackBackground: '#2D2D2D',
         trackBorderColor: '#7C7C7C',
-        height: 50,
-        barHeight:1,
         envelopeOptions: {
           lineColor: 'rgba(255, 0, 0, 0.7)',
           lineWidth: 0,
@@ -335,10 +344,10 @@ const initMultiTrack = (filenames) => {
         },
       },
     )
-    tracks.push(multitrack)
+    track_objs.push(multitrack)
   }
 
-  return tracks
+  return track_objs
 }
 
 
