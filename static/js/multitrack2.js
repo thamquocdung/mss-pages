@@ -247,9 +247,7 @@ const addEventMultitrack = (multitrack, index) => {
           container = wavesurfer["renderer"]["container"]
           container.classList.add("disabletrack");
         } else {
-          
           container = wavesurfer["renderer"]["container"]
-          // console.log(container)
           container.classList.remove("disabletrack");
         }
       
@@ -258,6 +256,7 @@ const addEventMultitrack = (multitrack, index) => {
         const volumeSlider = volumeSliders[i];
         const muteBtn = muteBtns[i];
         volumeSlider.value = volume;
+
         if (volume <= 0) {
           muteBtn.classList.add("muted");
         } else {
@@ -307,7 +306,7 @@ const initMultiTrack = (filenames) => {
       // console.log(`./static/audio/${filename}/${metaData[i]["stem"].toLowerCase()}.wav`)
       track = {
         id: i,
-        draggable: true,
+        draggable: false,
         // startPosition: 0.01,
         // startCue: 0.01,
         volume: 0.5,
@@ -330,7 +329,7 @@ const initMultiTrack = (filenames) => {
       {
         container: document.querySelector(`#multitrack${f}`), // required!
         minPxPerSec: 12, // zoom level
-        rightButtonDrag: true, // drag tracks with the right mouse button
+        rightButtonDrag: false, // drag tracks with the right mouse button
         cursorColor: '#57BAB6',
         cursorWidth: 5,
         trackBackground: '#2D2D2D',
