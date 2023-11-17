@@ -85,7 +85,7 @@ const addController = () =>{
   
 }
 
-const addEventMultitrack = (multitrack, index, filename) => {
+const addEventMultitrack = (multitrack, index) => {
   
   multitrack.on('volume-change', ({ id, volume }) => {
     console.log(`Track ${id} volume updated to ${volume}`)
@@ -264,12 +264,12 @@ const addEventMultitrack = (multitrack, index, filename) => {
   const syncTrackToVideo = () => {
     currentTime = multitrack.getCurrentTime();
     videoPlayer.currentTime = currentTime;
-    console.log(videoPlayer, currentTime)
     multitrack.setTime(currentTime);
   };
-  trackContainer = document.querySelectorAll(`#multitrack${index}`);
+  trackContainer = document.querySelector(`#multitrack${index}`);
   // console.log(trackContainer)
   trackContainer.onclick = () => {
+    console.log("sync")
     syncTrackToVideo()
   }
 
