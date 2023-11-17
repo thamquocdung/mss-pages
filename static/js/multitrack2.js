@@ -137,7 +137,7 @@ const addEventMultitrack = (multitrack, index) => {
     //   console.log("finished")
     // })
     multitrack.wavesurfers[0].on('audioprocess', function (time) {
-      pointer = $("#multitrack0 > div > div > div")[0]
+      pointer = $(`#multitrack${index} > div > div > div`)[0]
       waveProgress = parseFloat(pointer.style.left.slice(0,-1))
 
       // console.log(time, multitrack.wavesurfers[0].getDuration(), parseFloat(pointer.style.left.slice(0,-1)))
