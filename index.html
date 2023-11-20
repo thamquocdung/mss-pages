@@ -174,13 +174,13 @@
 <script src="static/js/ejs.js"></script>
 <script>
   var num_samples = 3;
-  const trackNames = [[0, "G5ERdrjBe40"], [1, "fdcJEKh6jFw"], [2, "rRFDUclCpvU"]]
+  const trackNames = [[0, "G5ERdrjBe40", "Pop Ballad"], [1, "fdcJEKh6jFw", "Pop Ballad"], [2, "f-BzUepNeZw", "Bossa Nova"], [3, "rRFDUclCpvU", "Pop Acoustic"], [4, "AgFeZr5ptV8", "US/UK"], [5, "dbiqR8dkITI", "EDM"], [6, "V1ah6tmNUz8", "EDM"], [7, "tOS41n0-JBs", "Rock"], [8, "SeejJrinv3Y", "Bolero"], [9, "jhln5b4wOfI", "Contemporary folk"], [10, "4F4fPTxs7w8", "Postcad"], [11, "UVbv-PJXm14", "Rap/Hiphop"], [12, "86tDEt7IH40", "Rap/Hiphop"]]
   html = ejs.render(
 `
     <% trackNames.forEach(function(trackName){ %>
       <div class="result-container">
 
-        <img src="static/images/disc.png" class="song-icon"> Song #<%=trackName[0]+1%></img>
+        <img src="static/images/disc.png" class="song-icon"> Song #<%=trackName[0]+1%> - <%=trackName[2]%></img>
         <div style="width: 100%;display: flex;justify-content: center; margin-bottom: 10px;">
           <div class="audio-container" style="margin: 2em 0;">
             <div class="buttons" style="justify-content: space-around;">
